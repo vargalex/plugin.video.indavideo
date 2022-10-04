@@ -9,6 +9,8 @@ except:
 
 from resources.lib import control
 
+from resources.lib.utils import py2_encode, py2_decode
+
 
 def get(function, timeout, *args, **table):
     try:
@@ -35,7 +37,7 @@ def get(function, timeout, *args, **table):
         dbcur.execute("SELECT * FROM %s WHERE func = '%s' AND args = '%s'" % (table, f, a))
         match = dbcur.fetchone()
 
-        response = eval(match[2].encode('utf-8'))
+        response = eval(py2_encode(match[2]))
 
         t1 = int(match[3])
         t2 = int(time.time())
@@ -65,7 +67,7 @@ def get(function, timeout, *args, **table):
         pass
 
     try:
-        return eval(r.encode('utf-8'))
+        return eval(py2_encode(r))
     except:
         pass
 

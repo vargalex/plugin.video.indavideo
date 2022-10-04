@@ -1,3 +1,8 @@
+V1.1.12
+- Forrás változás követése
+- Matrix kompatibilitás
+- Nexus kompatibilitás
+
 V1.1.11
 - Hibajavitasok
 

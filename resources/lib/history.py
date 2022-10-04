@@ -7,6 +7,7 @@ except:
 import json
 
 from resources.lib import control
+from resources.lib.utils import py2_encode, py2_decode
 
 
 def getHistory():
@@ -15,7 +16,7 @@ def getHistory():
         dbcur = dbcon.cursor()
         dbcur.execute("SELECT * FROM history")
         items = dbcur.fetchall()
-        items = [(i[0].encode('utf-8'), eval(i[1].encode('utf-8'))) for i in items]
+        items = [(py2_encode(i[0]), eval(py2_encode(i[1]))) for i in items]
     except:
         items = []
 
@@ -23,13 +24,13 @@ def getHistory():
 
 
 def addHistory(name):
-    try:       
+    try:
         control.makeFile(control.dataPath)
         dbcon = database.connect(control.historyFile)
         dbcur = dbcon.cursor()
         dbcur.execute("CREATE TABLE IF NOT EXISTS history (""id TEXT, ""items TEXT, ""UNIQUE(id)"");")
-        dbcur.execute("DELETE FROM history WHERE id = '%s'" %  name.decode('utf-8'))
-        dbcur.execute("INSERT INTO history Values (?, ?)", (name.decode('utf-8'), '0'))
+        dbcur.execute("DELETE FROM history WHERE id = '%s'" %  py2_decode(name))
+        dbcur.execute("INSERT INTO history Values (?, ?)", (py2_decode(name), '0'))
         dbcon.commit()
 
         control.refresh()
@@ -42,7 +43,7 @@ def deleteHistory(name):
         try:
             dbcon = database.connect(control.historyFile)
             dbcur = dbcon.cursor()
-            dbcur.execute("DELETE FROM history WHERE id = '%s'" % name.decode('utf-8'))
+            dbcur.execute("DELETE FROM history WHERE id = '%s'" % py2_decode(name))
             dbcon.commit()
         except:
             pass
