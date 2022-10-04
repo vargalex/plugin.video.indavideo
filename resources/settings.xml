@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+    <category label="Általános">
+        <setting label="Videó minősége" type="enum" id="autopick" values="Választható|Legjobb" default="0"/>
+        <setting label="Videók rendezése" type="enum" id="msort" values="Legfrissebb|Legnézettebb|Legtöbbet kedvencelt|Legtöbb hozzászólás" default="0"/>
+        <setting label="Felnőtt tartalom engedélyezése" type="bool" id="adult" default="false"/>
+        <setting id="clear_cache" type="action" label="[COLOR blue]Gyorsítótár törlése[/COLOR]" default="" action="RunPlugin(plugin://plugin.video.indavideo/?mode=13)"/>
+    </category>
+    <category label="Fiókom">
+    	<setting type="lsep" label="Bejelentkezés" />
+		<setting id="inda.user" type="text" label="Indapass email cím" default="" />
+		<setting id="inda.pass" type="text" option="hidden" label="Jelszó" default="" />
+	</category>
+	<category label="Letöltés">
+        <setting label="Letöltési beállítások" type="lsep"/>
+        <setting label="Mentés helye" type="folder" id="savefolder" source="auto" default="Nincs megadva!" option="writeable"/>
+    </category>
+</settings>
